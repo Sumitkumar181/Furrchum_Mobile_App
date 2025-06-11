@@ -28,7 +28,7 @@ export default function TopDentist() {
         <SafeAreaView style={styles.container}>
            
             <View style={styles.header}>
-                <TouchableOpacity onPress={() => router.push('/(tabs)')}>
+                <TouchableOpacity onPress={() => router.push('/allspecialists/AllSpecialists')} style={styles.LeftArrow}>
                     <ArrowLeft size={24} color="#111827" />
                 </TouchableOpacity>
                 <Text style={styles.headerTitle}>Top Nutritionist</Text>
@@ -91,6 +91,15 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#D1D5DB',
     },
+    LeftArrow: {
+            alignItems: 'center',
+            flexDirection: 'row',
+            justifyContent: "center",
+            borderRadius: 5,
+            height: 35,
+            width: 40,
+            backgroundColor: Colors.primary,
+        },
     headerTitle: {
         fontSize: 18,
         fontFamily:"inter",

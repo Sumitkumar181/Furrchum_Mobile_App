@@ -95,7 +95,7 @@ export default function NewAppointmentScreen() {
                 [
                     {
                         text: 'OK',
-                        // onPress: () => router.push('/appointments')
+                        onPress: () => router.push('/appoinments')
                     }
                 ]
             );
@@ -207,9 +207,9 @@ export default function NewAppointmentScreen() {
                                     onPress={() => setSelectedType('video')}
                                 >
                                     <View style={styles.communicationIconContainer}>
-                                        <Video size={24} color={Colors.white} />
+                                        <Video size={24} color={Colors.primary} />
                                     </View>
-                                    <Text style={styles.communicationOptionText}>Video Call</Text>
+                                    <Text style={[styles.communicationOptionText, (selectedType === 'video' || selectedType === 'chat') && styles.selectedOptionText]}>Video Call</Text>
                                 </TouchableOpacity>
 
                                 <TouchableOpacity
@@ -217,9 +217,9 @@ export default function NewAppointmentScreen() {
                                     onPress={() => setSelectedType('chat')}
                                 >
                                     <View style={styles.communicationIconContainer}>
-                                        <MessageSquare size={24} color={Colors.white} />
+                                        <MessageSquare size={24} color={Colors.primary} />
                                     </View>
-                                    <Text style={styles.communicationOptionText}>Chat</Text>
+                                    <Text style={[styles.communicationOptionText, (selectedType === 'video' || selectedType === 'chat') && styles.selectedOptionText]}>Chat</Text>
                                 </TouchableOpacity>
 
                                 <TouchableOpacity
@@ -227,9 +227,9 @@ export default function NewAppointmentScreen() {
                                     onPress={() => setSelectedType('video')}
                                 >
                                     <View style={styles.communicationIconContainer}>
-                                        <Phone size={24} color={Colors.white} />
+                                        <Phone size={24} color={Colors.primary} />
                                     </View>
-                                    <Text style={styles.communicationOptionText}>Phone Call</Text>
+                                    <Text style={[styles.communicationOptionText, (selectedType === 'video' || selectedType === 'chat') && styles.selectedOptionText]}>Phone Call</Text>
                                 </TouchableOpacity>
                             </View>
 
@@ -240,7 +240,7 @@ export default function NewAppointmentScreen() {
                                 ]}
                                 onPress={() => setSelectedType('video')}
                             >
-                                <Text style={styles.selectButtonText}>
+                                <Text style={[styles.communicationOptionText, (selectedType === 'video' || selectedType === 'chat') && styles.selectedOptionText]}>
                                     ₹{getAppointmentPrice()} Select
                                 </Text>
                             </TouchableOpacity>
@@ -258,9 +258,10 @@ export default function NewAppointmentScreen() {
                                     onPress={() => setSelectedType('clinic')}
                                 >
                                     <View style={styles.communicationIconContainer}>
-                                        <Building2 size={24} color={Colors.white} />
+                                        <Building2 size={30} color={Colors.primary} />
                                     </View>
-                                    <Text style={styles.communicationOptionText}>Clinic</Text>
+                                    
+                                    <Text style={[styles.communicationOptionText, selectedType === 'clinic' && styles.selectedOptionText]}>Clinic</Text>
                                 </TouchableOpacity>
                             </View>
 
@@ -271,54 +272,12 @@ export default function NewAppointmentScreen() {
                                 ]}
                                 onPress={() => setSelectedType('clinic')}
                             >
-                                <Text style={styles.selectButtonText}>
+                                <Text style={[styles.communicationOptionText, selectedType === 'clinic' && styles.selectedOptionText]}>
                                     ₹550 Select
                                 </Text>
                             </TouchableOpacity>
                         </View>
                     </View>
-                </View>
-
-                <View style={styles.section}>
-                    <Text style={styles.sectionTitle}>Select Pet</Text>
-
-                    <ScrollView
-                        horizontal
-                        showsHorizontalScrollIndicator={false}
-                        contentContainerStyle={styles.petsContainer}
-                    >
-                        {pets.map((pet) => {
-                            const isSelected = pet.id === selectedPet?.id;
-
-                            return (
-                                <TouchableOpacity
-                                    key={pet.id}
-                                    style={[
-                                        styles.petItem,
-                                        isSelected && styles.selectedPetItem
-                                    ]}
-                                    onPress={() => setSelectedPet(pet)}
-                                >
-                                    <Text
-                                        style={[
-                                            styles.petName,
-                                            isSelected && styles.selectedPetText
-                                        ]}
-                                    >
-                                        {pet.name}
-                                    </Text>
-                                    <Text
-                                        style={[
-                                            styles.petInfo,
-                                            isSelected && styles.selectedPetText
-                                        ]}
-                                    >
-                                        {pet.breed}, {pet.age} years
-                                    </Text>
-                                </TouchableOpacity>
-                            );
-                        })}
-                    </ScrollView>
                 </View>
 
                 <View style={styles.summarySection}>
@@ -479,21 +438,36 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         padding: 16,
     },
+    selectedOptionText: {
+        color: Colors.white,
+    },
     communicationOption: {
         alignItems: 'center',
     },
     communicationIconContainer: {
         width: 50,
         height: 50,
-        borderRadius: 25,
-        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+        borderRadius: 10,
+        backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 8,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    selectedIconContainer: {
+        backgroundColor: Colors.primary,
     },
     communicationOptionText: {
         fontSize: 14,
-        color: Colors.white,
+        color: Colors.primary,
     },
     selectButton: {
         borderWidth: 1,
@@ -506,7 +480,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.primary,
     },
     selectButtonText: {
-        color: Colors.primary,
+        color: 'white',
         fontWeight: '500',
     },
     petsContainer: {
@@ -574,6 +548,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.white,
         paddingHorizontal: 20,
         paddingVertical: 16,
+        marginBottom: 50,
         borderTopWidth: 1,
         borderTopColor: Colors.border,
     },

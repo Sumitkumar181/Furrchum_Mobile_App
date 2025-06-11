@@ -57,7 +57,7 @@ export default function AppointmentCard({
 
     const handleReschedule = () => {
         router.push({
-            pathname: '/appointment/reschedule/[id]',
+            pathname: '/appointment/cancel/[id]',
             params: { id: appointment.id },
         });
     };

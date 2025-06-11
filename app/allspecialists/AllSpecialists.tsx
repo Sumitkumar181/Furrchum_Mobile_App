@@ -53,7 +53,7 @@ export default function AllSpecialists() {
                 onPress={() => handleSpecialistPress(item.name)}
             >
                 <View style={styles.iconContainer}>
-                    <Icon width={50} height={50} />
+                    <Icon width={50} height={50}/>
                 </View>
                 <Text style={styles.label}>{item.name}</Text>
             </TouchableOpacity>
@@ -63,7 +63,7 @@ export default function AllSpecialists() {
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
-                <TouchableOpacity onPress={() => router.push('/(tabs)')}>
+                <TouchableOpacity onPress={() => router.push('/(tabs)')} style={styles.LeftArrow}>
                     <ArrowLeft size={24} color="#111827" />
                 </TouchableOpacity>
                 <Text style={styles.headerTitle}>All Specialists</Text>
@@ -99,6 +99,15 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: '#D1D5DB',
     },
+    LeftArrow: {
+            alignItems: 'center',
+            flexDirection: 'row',
+            justifyContent: "center",
+            borderRadius: 5,
+            height: 35,
+            width: 40,
+            backgroundColor: Colors.primary,
+        },
     headerTitle: {
         fontSize: 18,
         fontFamily: 'inter',

@@ -37,7 +37,7 @@ export default function AppointmentsScreen() {
             description="You haven't made a schedule for an appointment with a vet"
             buttonTitle="Schedule a Appointment"
             onButtonPress={() => router.push('/appointment/new')}
-            imageUrl="https://images.unsplash.com/photo-1548767797-d8c844163c4c?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
+            imageUrl={require('@/assets/images/dog.svg')}
         />
     );
 
