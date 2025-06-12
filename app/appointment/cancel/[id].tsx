@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, ScrollView,  } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { Video } from 'lucide-react-native';
+import { Video, Building2, Calendar } from 'lucide-react-native';
 import Colors from '@/constants/Colors';
 import { useAppointmentStore } from '@/store/appointment-store';
 import { veterinarians } from '@/mocks/veterinarians';
@@ -18,8 +18,8 @@ export default function CancelAppointmentScreen() {
     if (!appointment || !vet) return <Text>Appointment not found</Text>;
 
     const handleCancel = () => {
-       cancelAppointment(id)
-        router.back(); 
+        cancelAppointment(id)
+        router.back();
     };
 
     return (
@@ -28,17 +28,32 @@ export default function CancelAppointmentScreen() {
                 <Image source={{ uri: vet.photoUrl }} style={styles.vetImage} />
                 <View>
                     <Text style={styles.vetName}>{vet.name}</Text>
-                    <View style={styles.statusBadge}>
-                        <Text style={styles.statusText}>Cancelled</Text>
+                    <View style={styles.cancelContainer}>
+                        <View style={styles.statusBadge}>
+                            <Text style={styles.statusText}>Cancel</Text>
+                        </View>
+                        <View style={styles.buldingIcon}>
+                            <Building2 size={28} color={Colors.primary} />
+                        </View>
+                    </View>
+                    <View style={styles.appoimentDate}>
+                    <Calendar size={20} color={Colors.primary} />
+                        <Text>28 May 2025</Text>
                     </View>
                 </View>
             </View>
 
             <View style={styles.callCard}>
-                <Video size={20} color={Colors.white} />
+                <View style={styles.callVideo}>
+                    <Video size={38} color={Colors.primary} />
+                </View>
+                
                 <View style={styles.callDetails}>
                     <Text style={styles.callType}>Video Call</Text>
-                    <Text style={styles.callDesc}>Interact with vet via video call</Text>
+                    <View style={styles.callDescContainer}>
+                    <Text style={styles.callDesc}>Interact with vet via </Text>
+                        <Text style={styles.callDesc}>video call</Text>
+                    </View>
                 </View>
                 <Text style={styles.callPrice}>₹400</Text>
             </View>
@@ -83,30 +98,59 @@ const styles = StyleSheet.create({
         padding: 12,
         borderRadius: 12,
         marginBottom: 16,
+        marginTop: 50,
         elevation: 2,
     },
     vetImage: {
-        width: 60,
-        height: 60,
-        borderRadius: 30,
+        width: 100,
+        height: 100,
+        borderRadius: 10,
         marginRight: 12,
     },
     vetName: {
-        fontSize: 16,
+        fontSize: 20,
         fontWeight: '600',
         color: Colors.text,
     },
+    cancelContainer: {
+        flexDirection: 'row',
+        gap:25,
+        justifyContent: 'space-between'
+    },
+    buldingIcon: {
+        alignItems: "center",
+        justifyContent: "center",
+        height: 50,
+        width: 50,
+        borderRadius: 20,
+        backgroundColor: Colors.lightBlue,
+    },
+    appoimentDate: {
+        flexDirection: 'row',
+        gap: 8,
+        marginTop:8,     
+    },
+    appoimenteText: {
+        color: Colors.lightBlack,
+        fontSize: 20,
+    },
     statusBadge: {
-        marginTop: 4,
+        marginTop: 8,
         borderColor: Colors.error,
         borderWidth: 1,
         paddingHorizontal: 8,
         paddingVertical: 2,
         borderRadius: 6,
+        height: 35,
+        width: 150,
+        alignItems: "center",
+        justifyContent: "center",
+
     },
     statusText: {
         color: Colors.error,
         fontWeight: '500',
+        textAlign: 'center',
         fontSize: 12,
     },
     callCard: {
@@ -117,6 +161,25 @@ const styles = StyleSheet.create({
         padding: 12,
         marginBottom: 16,
     },
+    callVideo: {
+            width: 80,
+            height: 80,
+            borderRadius: 10,
+            backgroundColor: 'white',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginBottom: 8,
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 2,
+
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
+        
+    },
     callDetails: {
         flex: 1,
         marginLeft: 12,
@@ -124,6 +187,10 @@ const styles = StyleSheet.create({
     callType: {
         color: Colors.white,
         fontWeight: '600',
+        fontSize:18,
+    },
+    callDescContainer: {
+        marginTop:8,
     },
     callDesc: {
         color: Colors.white,
@@ -132,6 +199,8 @@ const styles = StyleSheet.create({
     callPrice: {
         color: Colors.white,
         fontWeight: '600',
+        marginRight: 20,
+        fontSize: 16,
     },
     sectionTitle: {
         fontSize: 16,

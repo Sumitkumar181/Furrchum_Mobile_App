@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     FlatList
 } from 'react-native';
+
 import { useRouter } from 'expo-router';
 import { Plus } from 'lucide-react-native';
 import Colors from '@/constants/Colors';
@@ -37,7 +38,7 @@ export default function AppointmentsScreen() {
             description="You haven't made a schedule for an appointment with a vet"
             buttonTitle="Schedule a Appointment"
             onButtonPress={() => router.push('/appointment/new')}
-            imageUrl={require('@/assets/images/dog.svg')}
+            imageUrl={require('@/assets/images/dog.png')}
         />
     );
 

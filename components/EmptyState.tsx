@@ -2,14 +2,15 @@ import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import Button from './Button';
 import Colors from '@/constants/Colors';
+import { ImageSourcePropType } from 'react-native';
 
 interface EmptyStateProps {
     title: string;
     description: string;
     buttonTitle?: string;
     onButtonPress?: () => void;
-    imageUrl?: string;
-}
+    imageUrl?: ImageSourcePropType;
+}   
 
 export default function EmptyState({
     title,
@@ -20,16 +21,17 @@ export default function EmptyState({
 }: EmptyStateProps) {
     return (
         <View style={styles.container}>
+            
+
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.description}>{description}</Text>
             {imageUrl && (
                 <Image
-                    source={{ uri: imageUrl }}
+                    source={imageUrl}
                     style={styles.image}
                     resizeMode="contain"
                 />
             )}
-
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.description}>{description}</Text>
 
             {buttonTitle && onButtonPress && (
                 <Button
@@ -50,7 +52,7 @@ const styles = StyleSheet.create({
         padding: 24,
     },
     image: {
-        width: 200,
+        width: 300,
         height: 200,
         marginBottom: 24,
     },
@@ -63,11 +65,12 @@ const styles = StyleSheet.create({
     },
     description: {
         fontSize: 16,
-        color: Colors.lightText,
+        color: Colors.lightBlack,
         textAlign: 'center',
         marginBottom: 24,
     },
     button: {
-        minWidth: 200,
+        minWidth: 350,
+        borderRadius:30,
     },
 });
